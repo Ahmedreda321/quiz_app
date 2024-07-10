@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/utils/colors.dart';
 
-class TouchID extends StatelessWidget {
-  const TouchID({super.key});
+class TouchIdIcon extends StatelessWidget {
+  const TouchIdIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Icon(
-            Icons.fingerprint,
-            color: Colors.blue.shade600,
-            size: 70.0,
-            shadows: [
-              Shadow(
-                blurRadius: 10.0,
-                color: Colors.grey[500]!,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Text(
-            'Use Touch ID',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.grey.shade600,
-            ),
-          ),
+    return Icon(
+      Icons.fingerprint,
+      color: Colors.blue.shade600,
+      size: 70.0,
+      shadows: [
+        Shadow(
+          blurRadius: 10.0,
+          color: textformiconcolor[500]!,
+          offset: const Offset(0, 3),
         ),
       ],
+    );
+  }
+}
+
+class TouchIdText extends StatelessWidget {
+  const TouchIdText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'use touch id',
+      style: TextStyle(fontSize: 18, color: textformiconcolor.shade600),
     );
   }
 }

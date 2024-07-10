@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/utils/colors.dart';
 import 'package:quiz_app/utils/images_name.dart';
 
 class LandingHeader extends StatelessWidget {
@@ -6,17 +7,18 @@ class LandingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(logo),
+        Image.asset(logo, height: mediaQuery.height * 0.2, width: 200),
         const Text(
           'ITI Quiz App',
           style: TextStyle(
             fontFamily: 'TitilliumWeb',
-            fontSize: 35,
+            fontSize: 50,
             fontWeight: FontWeight.bold,
-            color: Colors.yellow,
+            color: primaryTextColor,
           ),
         ),
         const Text(
@@ -24,8 +26,8 @@ class LandingHeader extends StatelessWidget {
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontFamily: 'Margarine',
+            color: sideTextColor,
+            fontFamily: 'TitilliumWeb',
           ),
           textAlign: TextAlign.center,
         ),

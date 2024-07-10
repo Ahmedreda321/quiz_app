@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/utils/colors.dart';
 
-class Footer extends StatefulWidget {
-  const Footer({super.key});
+class RememberMeRow extends StatelessWidget {
+  final bool isChecked;
+  final ValueChanged<bool> onChanged;
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _FooterState createState() => _FooterState();
-}
-
-class _FooterState extends State<Footer> {
-  bool isChecked = false;
-
-  void _toggleRememberMe() {
-    setState(() {
-      isChecked = !isChecked;
-    });
-  }
+  const RememberMeRow({
+    super.key,
+    required this.isChecked,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +18,13 @@ class _FooterState extends State<Footer> {
       child: Row(
         children: [
           IconButton(
-            onPressed: _toggleRememberMe,
+            onPressed: () {
+              onChanged(!isChecked);
+            },
             icon: isChecked
-                ? const Icon(Icons.check_box, color: Colors.green)
+                ? const Icon(Icons.check_box, color: sideColor)
                 : const Icon(Icons.check_box_outline_blank_rounded,
-                    color: Colors.green),
+                    color: sideColor),
           ),
           const Text('Remember me'),
           const Spacer(),
@@ -36,10 +32,7 @@ class _FooterState extends State<Footer> {
             onPressed: () {},
             child: const Text(
               'Forgot Password?',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.green,
-              ),
+              style: TextStyle(fontSize: 18, color: sideColor),
             ),
           ),
         ],

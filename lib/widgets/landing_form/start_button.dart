@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/login_screen.dart';
-import 'package:stroke_text/stroke_text.dart';
+import 'package:quiz_app/utils/colors.dart';
 
 class StartButton extends StatelessWidget {
   const StartButton({super.key});
@@ -10,31 +10,29 @@ class StartButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(25.0),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return const LoginScreen();
-              },
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const LoginScreen();
+                },
+              ),
+            );
+          },
+          style: ButtonStyle(
+            elevation: WidgetStateProperty.all(12.0),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-          );
-        },
-        style: ButtonStyle(
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            minimumSize: WidgetStateProperty.all(const Size(400, 50)),
+            backgroundColor: WidgetStateProperty.all(primaryTextColor),
           ),
-          minimumSize: WidgetStateProperty.all(const Size(400, 50)),
-          backgroundColor: WidgetStateProperty.all(Colors.yellow),
-        ),
-        child: const StrokeText(
-          strokeWidth: 1.5,
-          strokeColor: Colors.black,
-          text: 'start',
-          textStyle: TextStyle(fontSize: 30, color: Colors.white),
-        ),
-      ),
+          child: const Text(
+            'Start',
+            style: TextStyle(fontSize: 35, color: sideTextColor),
+          )),
     );
   }
 }

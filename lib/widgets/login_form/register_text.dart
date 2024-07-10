@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/utils/colors.dart';
 
-class RegisterText extends StatelessWidget {
-  const RegisterText({super.key});
+class RegisterRow extends StatelessWidget {
+  const RegisterRow({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Spacer(),
+        // const Spacer(),
         const Text(
           'New to ITI Quiz App?',
           style: TextStyle(
-            fontSize: 15,
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-          ),
+              fontSize: 15, color: Colors.black, fontWeight: FontWeight.w400),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -24,10 +22,7 @@ class RegisterText extends StatelessWidget {
             child: const Text(
               'Register',
               style: TextStyle(
-                fontSize: 18,
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 18, color: sideColor, fontWeight: FontWeight.bold),
             ),
           ),
         ),

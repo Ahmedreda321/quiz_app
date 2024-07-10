@@ -82,7 +82,7 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:quiz_app/utils/images_name.dart';
+import 'package:quiz_app/utils/colors.dart';
 import 'package:quiz_app/widgets/landing_form/landing_header.dart';
 import 'package:quiz_app/widgets/landing_form/start_button.dart';
 
@@ -98,11 +98,10 @@ class LandingScreen extends StatelessWidget {
         height: mediaQuery.height,
         width: mediaQuery.width,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(background),
-            fit: BoxFit.cover,
-          ),
-        ),
+            gradient: LinearGradient(colors: [
+          primaryColor,
+          sideColor,
+        ])),
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
