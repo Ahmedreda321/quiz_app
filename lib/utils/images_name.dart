@@ -9,3 +9,4 @@ const String languages = 'assets/images/languages.png';
 const String mathematics = 'assets/images/mathematics.png';
 const String science = 'assets/images/science.png';
 const String cup = 'assets/images/cup.png';
+const String iq = 'assets/images/idea.png';

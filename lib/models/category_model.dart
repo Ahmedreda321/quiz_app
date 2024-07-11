@@ -8,10 +8,11 @@ class CategoryModel {
 }
 
 List<CategoryModel> categories = [
+  CategoryModel(name: 'IQ', image: iq),
   CategoryModel(name: 'Art', image: art),
-  CategoryModel(name: 'Drama', image: drama),
   CategoryModel(name: 'Knowledge', image: knowleg),
   CategoryModel(name: 'Languages', image: languages),
   CategoryModel(name: 'Math', image: mathematics),
   CategoryModel(name: 'Science', image: science),
+  CategoryModel(name: 'cinema', image: drama),
 ];
