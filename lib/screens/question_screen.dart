@@ -166,6 +166,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     message: 'Are you sure you want to exit?',
                     title: 'Back to categories',
                     onPressed: () {
+                      score = 0;
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute<void>(

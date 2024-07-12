@@ -4,6 +4,7 @@ import 'package:quiz_app/screens/landing_screen.dart';
 
 import 'package:quiz_app/utils/alert_dialoge.dart';
 import 'package:quiz_app/utils/colors.dart';
+import 'package:quiz_app/utils/globel.dart';
 
 class ScoreButtons extends StatelessWidget {
   const ScoreButtons({super.key});
@@ -15,6 +16,7 @@ class ScoreButtons extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
+            score = 0;
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -41,6 +43,7 @@ class ScoreButtons extends StatelessWidget {
               message: 'Are you sure?',
               title: 'Exit',
               onPressed: () {
+                score = 0;
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
