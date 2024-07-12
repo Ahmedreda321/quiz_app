@@ -1,21 +1,31 @@
 // import 'package:flutter/material.dart';
+// import 'package:quiz_app/screens/category_screen.dart';
 // import 'package:quiz_app/screens/score_screen.dart';
+// import 'package:quiz_app/utils/alert_dialoge.dart';
 // import 'package:quiz_app/widgets/custom_appbar.dart';
 // import 'package:quiz_app/widgets/gradient_background.dart';
+// import 'package:quiz_app/widgets/question_form/button_row.dart';
+// import 'package:quiz_app/widgets/question_form/option_tile.dart';
+// import 'package:quiz_app/widgets/question_form/question_text.dart';
 
 // class QuestionScreen extends StatefulWidget {
-//   const QuestionScreen({super.key});
-
+//   const QuestionScreen(
+//       {super.key, required this.categoryname, required this.listname});
+//   final String categoryname;
+//   final List<Map<dynamic, dynamic>> listname;
 //   @override
 //   State<QuestionScreen> createState() => _QuestionScreenState();
 // }
 
 // class _QuestionScreenState extends State<QuestionScreen> {
 //   String? _selectedOption;
+//   int index = 0;
+//   int score = 0;
 
 //   @override
 //   Widget build(BuildContext context) {
 //     final mediaQuery = MediaQuery.of(context).size;
+
 //     return Scaffold(
 //       body: GradientBackground(
 //         child: Padding(
@@ -23,129 +33,86 @@
 //           child: Column(
 //             crossAxisAlignment: CrossAxisAlignment.start,
 //             children: [
-//               const CustomAppBar(title: 'Questions'),
-//               const Spacer(),
-//               const Text(
-//                 'Question 1',
-//                 style: TextStyle(
-//                     fontSize: 30,
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.black54),
+//               CustomAppBar(
+//                   title: '${widget.categoryname} Questions',
+//                   onPressed: showAlertDialog(
+//                       message: 'Are you sure you want to exit?',
+//                       title: 'Back to categories', onPressed: () {
+//                     Navigator.pushAndRemoveUntil(
+//                       context,
+//                       MaterialPageRoute<void>(
+//                           builder: (BuildContext context) =>
+//                               const CategoryScreen()),
+//                       ModalRoute.withName('/'),
+//                     );
+//                   }, context)),
+//               SizedBox(
+//                 height: mediaQuery.height * 0.05,
 //               ),
-//               const Spacer(
-//                 flex: 2,
+//               QuestionText(
+//                 question: 'Question ${index + 1}',
+//                 questionDetail: widget.listname[index]['question'],
 //               ),
-//               const Text(
-//                 'Which artist was known for painting large-scale murals depicting scenes from Greek mythology?',
-//                 style: TextStyle(
-//                     fontSize: 23,
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.black54),
-//               ),
-//               const Spacer(
-//                 flex: 2,
-//               ),
-//               RadioListTile(
-//                 title: const Text(
-//                   'Leonardo da Vinci',
-//                   style: TextStyle(
-//                       fontSize: 23,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black54),
-//                 ),
-//                 value: 'Are parallel',
-//                 groupValue: _selectedOption,
-//                 onChanged: (value) {
+//               const Spacer(flex: 2),
+//               ...widget.listname[index]['answers'].map<Widget>((answer) {
+//                 return OptionTile(
+//                   optionText: answer['text'],
+//                   optionValue: answer['text'],
+//                   groupValue: _selectedOption,
+//                   onChanged: (value) {
+//                     setState(() {
+//                       _selectedOption = value;
+//                     });
+//                   },
+//                 );
+//               }).toList(),
+//               const Spacer(flex: 6),
+//               ButtonRow(
+//                 mediaQuery: mediaQuery,
+//                 onNextPressed: () {
+//                   if (_selectedOption != null) {
+//                     if (widget.listname[index]['answers'].firstWhere((answer) =>
+//                             answer['text'] == _selectedOption)['correct'] ==
+//                         true) {
+//                       score++;
+//                     }
+//                   } else {
+//                     showAlertDialog(context,
+//                         message: '', onPressed: () {}, title: '');
+//                   }
 //                   setState(() {
-//                     _selectedOption = value;
-//                   });
-//                 },
-//               ),
-//               RadioListTile(
-//                 title: const Text(
-//                   'Raphael',
-//                   style: TextStyle(
-//                       fontSize: 23,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black54),
-//                 ),
-//                 value: 'Leonardo da Vinci',
-//                 groupValue: _selectedOption,
-//                 onChanged: (value) {
-//                   setState(() {
-//                     _selectedOption = value;
-//                   });
-//                 },
-//               ),
-//               RadioListTile(
-//                 title: const Text(
-//                   'Michelangelo',
-//                   style: TextStyle(
-//                       fontSize: 23,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black54),
-//                 ),
-//                 value: 'Intersect at two points',
-//                 groupValue: _selectedOption,
-//                 onChanged: (value) {
-//                   setState(() {
-//                     _selectedOption = value;
-//                   });
-//                 },
-//               ),
-//               RadioListTile(
-//                 title: const Text(
-//                   'Sandro Botticelli',
-//                   style: TextStyle(
-//                       fontSize: 23,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black54),
-//                 ),
-//                 value: 'Intersect at one point',
-//                 groupValue: _selectedOption,
-//                 onChanged: (value) {
-//                   setState(() {
-//                     _selectedOption = value;
-//                   });
-//                 },
-//               ),
-//               const Spacer(
-//                 flex: 6,
-//               ),
-//               Row(
-//                 children: [
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       Navigator.push(
+//                     if (index < widget.listname.length - 1) {
+//                       index++;
+//                       _selectedOption = null;
+//                     } else {
+//                       Navigator.pushReplacement(
 //                         context,
 //                         MaterialPageRoute(
-//                           builder: (context) => const ScoreScreen(),
+//                           builder: (context) => ScoreScreen(
+//                             score: score,
+//                             listname: widget.listname,
+//                           ),
 //                         ),
 //                       );
-//                     },
-//                     style: ButtonStyle(
-//                       elevation: WidgetStateProperty.all(12.0),
-//                       backgroundColor: WidgetStateProperty.all(Colors.green),
-//                       minimumSize: WidgetStateProperty.all(
-//                         Size(mediaQuery.width * 0.45, 45),
-//                       ),
-//                     ),
-//                     child: const Text(
-//                       'Next',
-//                       style: TextStyle(fontSize: 25, color: Colors.white54),
-//                     ),
-//                   ),
-//                   const Spacer(),
-//                   ElevatedButton(
-//                     onPressed: () {},
-//                     style: ButtonStyle(
-//                       backgroundColor: WidgetStateProperty.all(Colors.white54),
-//                       elevation: WidgetStateProperty.all(12.0),
-//                     ),
-//                     child: const Text('Skip',
-//                         style: TextStyle(fontSize: 16, color: Colors.black54)),
-//                   ),
-//                 ],
+//                     }
+//                   });
+//                 },
+//                 onSkipPressed: () {
+//                   setState(() {
+//                     if (index < widget.listname.length - 1) {
+//                       index++;
+//                       _selectedOption = null;
+//                     } else {
+//                       Navigator.pushReplacement(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => ScoreScreen(
+//                               score: score, listname: widget.listname),
+//                         ),
+//                       );
+//                     }
+//                   });
+//                 },
 //               ),
 //             ],
 //           ),
@@ -156,7 +123,10 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:quiz_app/screens/category_screen.dart';
 import 'package:quiz_app/screens/score_screen.dart';
+import 'package:quiz_app/utils/alarm.dart';
+import 'package:quiz_app/utils/alert_dialoge.dart';
 import 'package:quiz_app/widgets/custom_appbar.dart';
 import 'package:quiz_app/widgets/gradient_background.dart';
 import 'package:quiz_app/widgets/question_form/button_row.dart';
@@ -164,18 +134,23 @@ import 'package:quiz_app/widgets/question_form/option_tile.dart';
 import 'package:quiz_app/widgets/question_form/question_text.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
-
+  const QuestionScreen(
+      {super.key, required this.categoryname, required this.listname});
+  final String categoryname;
+  final List<Map<dynamic, dynamic>> listname;
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
   String? _selectedOption;
+  int index = 0;
+  int score = 0;
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
+
     return Scaffold(
       body: GradientBackground(
         child: Padding(
@@ -183,66 +158,92 @@ class _QuestionScreenState extends State<QuestionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomAppBar(title: 'Questions'),
-              const Spacer(),
-              const QuestionText(
-                question: 'Question 1',
-                questionDetail:
-                    'Which artist was known for painting large-scale murals depicting scenes from Greek mythology?',
+              CustomAppBar(
+                title: '${widget.categoryname} Questions',
+                onPressed: () {
+                  showAlertDialog(
+                    context,
+                    message: 'Are you sure you want to exit?',
+                    title: 'Back to categories',
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              const CategoryScreen(),
+                        ),
+                        ModalRoute.withName('/'),
+                      );
+                    },
+                  );
+                },
+              ),
+              SizedBox(
+                height: mediaQuery.height * 0.05,
+              ),
+              QuestionText(
+                question: 'Question ${index + 1}',
+                questionDetail: widget.listname[index]['question'],
               ),
               const Spacer(flex: 2),
-              OptionTile(
-                optionText: 'Leonardo da Vinci',
-                optionValue: 'Leonardo da Vinci',
-                groupValue: _selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                },
-              ),
-              OptionTile(
-                optionText: 'Raphael',
-                optionValue: 'Raphael',
-                groupValue: _selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                },
-              ),
-              OptionTile(
-                optionText: 'Michelangelo',
-                optionValue: 'Michelangelo',
-                groupValue: _selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                },
-              ),
-              OptionTile(
-                optionText: 'Sandro Botticelli',
-                optionValue: 'Sandro Botticelli',
-                groupValue: _selectedOption,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedOption = value;
-                  });
-                },
-              ),
+              ...widget.listname[index]['answers'].map<Widget>((answer) {
+                return OptionTile(
+                  optionText: answer['text'],
+                  optionValue: answer['text'],
+                  groupValue: _selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedOption = value;
+                    });
+                  },
+                );
+              }).toList(),
               const Spacer(flex: 6),
               ButtonRow(
                 mediaQuery: mediaQuery,
                 onNextPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ScoreScreen(),
-                    ),
-                  );
+                  if (_selectedOption != null) {
+                    if (widget.listname[index]['answers'].firstWhere((answer) =>
+                            answer['text'] == _selectedOption)['correct'] ==
+                        true) {
+                      score++;
+                    }
+                    setState(() {
+                      if (index < widget.listname.length - 1) {
+                        index++;
+                        _selectedOption = null;
+                      } else {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScoreScreen(
+                              score: score,
+                              listname: widget.listname,
+                            ),
+                          ),
+                        );
+                      }
+                    });
+                  } else {
+                    Alert(context);
+                  }
                 },
-                onSkipPressed: () {},
+                onSkipPressed: () {
+                  setState(() {
+                    if (index < widget.listname.length - 1) {
+                      index++;
+                      _selectedOption = null;
+                    } else {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScoreScreen(
+                              score: score, listname: widget.listname),
+                        ),
+                      );
+                    }
+                  });
+                },
               ),
             ],
           ),

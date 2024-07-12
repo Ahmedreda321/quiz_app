@@ -12,10 +12,14 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        //categoryname = category.name;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const QuestionScreen(),
+            builder: (context) => QuestionScreen(
+              categoryname: category.name,
+              listname: category.listname,
+            ),
           ),
         );
       },

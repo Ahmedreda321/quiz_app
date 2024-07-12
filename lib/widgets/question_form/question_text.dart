@@ -23,7 +23,7 @@ class QuestionText extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: primaryTextColor),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 50),
         Text(
           questionDetail,
           style: const TextStyle(

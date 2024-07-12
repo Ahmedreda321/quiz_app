@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/screens/category_screen.dart';
 import 'package:quiz_app/screens/landing_screen.dart';
+
+import 'package:quiz_app/utils/alert_dialoge.dart';
 import 'package:quiz_app/utils/colors.dart';
 
 class ScoreButtons extends StatelessWidget {
@@ -13,7 +15,7 @@ class ScoreButtons extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const CategoryScreen(),
@@ -24,7 +26,7 @@ class ScoreButtons extends StatelessWidget {
             backgroundColor: sideColor[700],
           ),
           child: const Text(
-            'play Again',
+            'Play Again',
             style: TextStyle(
               color: sideTextColor,
               fontSize: 20,
@@ -34,11 +36,18 @@ class ScoreButtons extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
+            showAlertDialog(
               context,
-              MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const LandingScreen()),
-              ModalRoute.withName('/'),
+              message: 'Are you sure?',
+              title: 'Exit',
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LandingScreen(),
+                  ),
+                );
+              },
             );
           },
           style: TextButton.styleFrom(backgroundColor: sideTextColor),

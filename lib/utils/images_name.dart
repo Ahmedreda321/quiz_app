@@ -10,3 +10,6 @@ const String mathematics = 'assets/images/mathematics.png';
 const String science = 'assets/images/science.png';
 const String cup = 'assets/images/cup.png';
 const String iq = 'assets/images/idea.png';
+const String dislike = 'assets/images/dislike.png';
+const String good = 'assets/images/2.png';
+const String congrat = 'assets/images/3.png';

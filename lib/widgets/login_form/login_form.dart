@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/utils/globel.dart';
 import 'package:quiz_app/widgets/login_form/footer.dart';
 import 'package:quiz_app/widgets/login_form/login_button.dart';
 import 'package:quiz_app/widgets/login_form/register_text.dart';
 import 'login_title.dart';
 import 'text_field.dart';
-
 import 'touch_id.dart';
 
 class LoginForm extends StatefulWidget {
@@ -49,8 +49,19 @@ class _LoginFormState extends State<LoginForm> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your username';
+                } else if (value.length < 4) {
+                  return 'Username must be at least 4 characters long';
+                } else if (value.length > 8) {
+                  return 'Username mustn\'t be more than 8 characters long';
+                } else if (value[0] != value[0].toUpperCase()) {
+                  return 'The first character must be a uppercase letter';
                 }
                 return null;
+              },
+              onChanged: (value) {
+                setState(() {
+                  userName = value;
+                });
               },
             ),
             const Spacer(),
@@ -62,6 +73,8 @@ class _LoginFormState extends State<LoginForm> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password';
+                } else if (value.length < 8) {
+                  return 'Password must be at least 8 characters long';
                 }
                 return null;
               },

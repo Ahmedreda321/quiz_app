@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final bool obscureText;
   final String? Function(String?) validator;
+  final void Function(String)? onChanged;
   IconData? icon2;
 
   CustomTextField({
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     required this.validator,
     this.icon2,
+    this.onChanged,
   });
 
   @override
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
           labelStyle: TextStyle(color: textformiconcolor[600]),
         ),
         validator: validator,
+        onChanged: onChanged,
       ),
     );
   }

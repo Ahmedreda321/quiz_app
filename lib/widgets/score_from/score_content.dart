@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/utils/colors.dart';
-import 'package:quiz_app/utils/images_name.dart';
 
-class ScoreBody extends StatelessWidget {
-  const ScoreBody({super.key});
+class ScoreContent extends StatelessWidget {
+  final String imagePath;
+  final String resultText;
+  final String userName;
+  final int score;
+  final int listLength;
+
+  const ScoreContent({
+    super.key,
+    required this.imagePath,
+    required this.resultText,
+    required this.userName,
+    required this.score,
+    required this.listLength,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const Spacer(flex: 4),
-        Image.asset(cup, height: 200, width: 200),
+        Image.asset(imagePath, height: 200, width: 200),
         const Spacer(flex: 1),
         Text(
-          'congratulations'.toUpperCase(),
+          resultText.toUpperCase(),
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'TitilliumWeb',
+            color: sideTextColor,
+          ),
+        ),
+        Text(
+          userName.toUpperCase(),
           style: const TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
@@ -31,9 +52,9 @@ class ScoreBody extends StatelessWidget {
             color: primaryTextColor,
           ),
         ),
-        const Text(
-          '10/10',
-          style: TextStyle(
+        Text(
+          '$score/$listLength',
+          style: const TextStyle(
             fontSize: 70,
             fontWeight: FontWeight.bold,
             fontFamily: 'TitilliumWeb',

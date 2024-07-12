@@ -189,14 +189,4 @@ List<Map> iqQuestions = [
       {'text': '72', 'correct': false},
     ],
   },
-  {
-    'question':
-        'If it takes 5 machines 5 minutes to make 5 gadgets, how long would it take 100 machines to make 100 gadgets?',
-    'answers': [
-      {'text': '5 minutes', 'correct': true},
-      {'text': '10 minutes', 'correct': false},
-      {'text': '50 minutes', 'correct': false},
-      {'text': '100 minutes', 'correct': false},
-    ],
-  },
 ];

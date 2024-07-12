@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/screens/landing_screen.dart';
 import 'package:quiz_app/utils/colors.dart';
 import 'package:quiz_app/widgets/custom_appbar.dart';
 import 'package:quiz_app/widgets/gradient_background.dart';
@@ -27,7 +28,18 @@ class _LoginScreenState extends State<LoginScreen> {
           child: GradientBackground(
             child: Column(
               children: [
-                const CustomAppBar(title: 'Login'),
+                CustomAppBar(
+                  title: '',
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              const LandingScreen()),
+                      ModalRoute.withName('/'),
+                    );
+                  },
+                ),
                 LoginHeader(mediaQuery: mediaQuery),
                 LoginForm(mediaQuery: mediaQuery),
               ],

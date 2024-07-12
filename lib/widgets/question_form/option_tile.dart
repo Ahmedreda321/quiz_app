@@ -17,15 +17,26 @@ class OptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RadioListTile(
-      title: Text(
-        optionText,
-        style: const TextStyle(
-            fontSize: 23, fontWeight: FontWeight.bold, color: primaryTextColor),
-      ),
-      value: optionValue,
-      groupValue: groupValue,
-      onChanged: onChanged,
+    return Column(
+      children: [
+        RadioListTile(
+          title: Text(
+            optionText,
+            style: const TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+                color: primaryTextColor),
+          ),
+          value: optionValue,
+          groupValue: groupValue,
+          onChanged: onChanged,
+        ),
+        const Divider(
+          endIndent: 40,
+          indent: 40,
+          color: textformiconcolor,
+        ),
+      ],
     );
   }
 }
